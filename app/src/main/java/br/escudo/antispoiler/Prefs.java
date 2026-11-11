@@ -26,6 +26,20 @@ public final class Prefs {
     public static final String K_BLOCK_AMBIGUOUS = "blockAmbiguousNoAI";
     public static final String DEFAULT_MODEL = "gemini-flash-lite-latest";
 
+    // v2.0 — modo blindado
+    public static final String K_MODE = "mode";               // "blindado" (tela toda escura) | "post" (capa só no post)
+    public static final String K_MUTE = "mute";               // silencia o som quando bloqueia
+    public static final String K_SKIP = "skipShorts";         // pula Reels/Shorts/TikTok sozinho
+    public static final String K_BLOCK_SEARCH = "blockSearch";// apaga buscas com palavras bloqueadas
+    public static final String K_OCR = "imageOcr";            // lê texto dentro de imagens/vídeos (no celular)
+    public static final String K_VISION = "imageAI";          // IA visual (Gemini) — opcional
+
+    /** Apps onde a IA visual pode olhar a tela (nunca apps de conversa). */
+    public static final List<String> VISION_APPS = Arrays.asList(
+            "com.google.android.youtube", "com.instagram.android", "com.facebook.katana", "com.facebook.lite",
+            "com.twitter.android", "com.zhiliaoapp.musically", "com.ss.android.ugc.trill",
+            "com.instagram.barcelona", "com.reddit.frontpage", "com.kwai.video");
+
     /** Apps que o Escudo pode proteger: pacote -> nome. */
     public static final LinkedHashMap<String, String> APPS = new LinkedHashMap<>();
     /** Ligados de fábrica. */
@@ -173,6 +187,15 @@ public final class Prefs {
 
     public static boolean blockAmbiguousWithoutAI(Context c) {
         return sp(c).getBoolean(K_BLOCK_AMBIGUOUS, true);
+    }
+
+    public static boolean blindado(Context c) {
+        return !"post".equals(sp(c).getString(K_MODE, "blindado"));
+    }
+
+    public static boolean flag(Context c, String key) {
+        boolean def = !K_VISION.equals(key); // IA visual começa desligada (envia imagens para o Google)
+        return sp(c).getBoolean(key, def);
     }
 
     public static boolean aiOn(Context c) {

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
-    android:accessibilityEventTypes="typeWindowContentChanged|typeViewScrolled|typeWindowStateChanged"
+    android:accessibilityEventTypes="typeWindowContentChanged|typeViewScrolled|typeWindowStateChanged|typeViewTextChanged"
     android:accessibilityFeedbackType="feedbackGeneric"
     android:accessibilityFlags="flagIncludeNotImportantViews|flagReportViewIds"
+    android:canPerformGestures="true"
     android:canRetrieveWindowContent="true"
+    android:canTakeScreenshot="true"
     android:description="@string/service_description"
-    android:notificationTimeout="100"
+    android:notificationTimeout="60"
     android:settingsActivity="br.escudo.antispoiler.MainActivity"
     android:summary="@string/service_summary" />

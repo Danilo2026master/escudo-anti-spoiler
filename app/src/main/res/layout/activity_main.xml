@@ -81,6 +81,70 @@
                 android:textSize="15sp" />
         </LinearLayout>
 
+
+        <!-- Modo (2.0) -->
+        <LinearLayout style="@style/Card">
+
+            <TextView
+                style="@style/CardTitle"
+                android:text="NÍVEL DE PROTEÇÃO" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/modeBlindado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🛡️ Blindado: tela toda preta e som mudo quando aparece spoiler"
+                    android:textColor="@color/text"
+                    android:textSize="15sp" />
+
+                <RadioButton
+                    android:id="@+id/modePost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Leve: capa escura só em cima do post"
+                    android:textColor="@color/text"
+                    android:textSize="15sp" />
+            </RadioGroup>
+
+            <Switch
+                android:id="@+id/skipSwitch"
+                style="@style/FlagSwitch"
+                android:text="Pular Reels, Shorts e TikTok com spoiler sozinho" />
+
+            <Switch
+                android:id="@+id/muteSwitch"
+                style="@style/FlagSwitch"
+                android:text="Silenciar o som quando bloquear" />
+
+            <Switch
+                android:id="@+id/searchSwitch"
+                style="@style/FlagSwitch"
+                android:text="Apagar buscas com palavras bloqueadas" />
+
+            <Switch
+                android:id="@+id/ocrSwitch"
+                style="@style/FlagSwitch"
+                android:text="Ler texto dentro de imagens e vídeos (miniaturas, Reels)" />
+
+            <Switch
+                android:id="@+id/visionSwitch"
+                style="@style/FlagSwitch"
+                android:text="IA visual: reconhece personagens, logos e cenas" />
+
+            <TextView
+                android:id="@+id/visionHelp"
+                style="@style/Muted"
+                android:layout_marginTop="4dp"
+                android:text="A IA visual usa o Gemini (chave grátis, abaixo): manda uma imagem pequena da tela para o Google a cada ~4 segundos enquanto você usa YouTube, Instagram, Facebook, TikTok, X, Threads, Reddit ou Kwai. Nunca no WhatsApp, Telegram, Discord ou Chrome. A leitura de texto nas imagens é feita no próprio celular."
+                android:textSize="12sp" />
+        </LinearLayout>
+
         <!-- Adicionar tema -->
         <LinearLayout style="@style/Card">
 

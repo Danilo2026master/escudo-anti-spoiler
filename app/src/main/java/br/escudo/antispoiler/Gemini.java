@@ -84,8 +84,45 @@ public final class Gemini {
         return out;
     }
 
+    // ---------------------------------------------------------------- IA visual
+    public static final class VisionResult {
+        public boolean spoiler;
+        public String topic = "";
+        public String what = "";
+    }
+
+    private static final String VISION_SYSTEM =
+            "You are the image judge of a spoiler-blocking phone app. You get a screenshot of a social or video app "
+            + "(feed, Reels, Shorts, TikTok, video player) and the topics the user wants to avoid. Decide whether the "
+            + "screenshot shows anything about those topics: characters, actors in costume, logos, key art, game footage, "
+            + "movie or series scenes, thumbnails or titles. Answer spoiler=true only if it is clearly related. "
+            + "\"topic\": the topic name exactly as given (or empty). \"what\": max 8 words in Portuguese saying what you saw.";
+
+    public static VisionResult vision(String key, String model, byte[] jpeg, List<String> topics) throws Exception {
+        StringBuilder sb = new StringBuilder("Topics to avoid:\n");
+        for (int i = 0; i < topics.size(); i++) sb.append(i + 1).append(") ").append(topics.get(i)).append('\n');
+        sb.append("Return JSON.");
+        JSONObject schema = obj("type", "OBJECT", "properties", obj(
+                "spoiler", obj("type", "BOOLEAN"),
+                "topic", obj("type", "STRING"),
+                "what", obj("type", "STRING")));
+        schema.put("required", new JSONArray().put("spoiler").put("topic").put("what"));
+        JSONObject image = obj("inlineData", obj("mimeType", "image/jpeg",
+                "data", android.util.Base64.encodeToString(jpeg, android.util.Base64.NO_WRAP)));
+        JSONObject r = callParts(key, model, VISION_SYSTEM, new JSONArray().put(image).put(obj("text", sb.toString())), schema);
+        VisionResult v = new VisionResult();
+        v.spoiler = r.optBoolean("spoiler", false);
+        v.topic = clip(r.optString("topic", ""), 60);
+        v.what = clip(r.optString("what", ""), 80);
+        return v;
+    }
+
     // ---------------------------------------------------------------- HTTP
     static JSONObject call(String key, String model, String system, String prompt, JSONObject schema) throws Exception {
+        return callParts(key, model, system, new JSONArray().put(obj("text", prompt)), schema);
+    }
+
+    static JSONObject callParts(String key, String model, String system, JSONArray parts, JSONObject schema) throws Exception {
         if (key == null || key.isEmpty()) throw new Exception("Falta a chave do Gemini.");
         String[] models = model == null || model.isEmpty() || model.equals("gemini-flash-latest")
                 ? new String[]{"gemini-flash-latest"}
@@ -94,7 +131,7 @@ public final class Gemini {
         for (String m : models) {
             JSONObject body = new JSONObject();
             body.put("systemInstruction", obj("parts", new JSONArray().put(obj("text", system))));
-            body.put("contents", new JSONArray().put(obj("role", "user", "parts", new JSONArray().put(obj("text", prompt)))));
+            body.put("contents", new JSONArray().put(obj("role", "user", "parts", parts)));
             body.put("generationConfig", obj("temperature", 0.2, "responseMimeType", "application/json", "responseSchema", schema));
 
             URL url = new URL("https://generativelanguage.googleapis.com/v1beta/models/"

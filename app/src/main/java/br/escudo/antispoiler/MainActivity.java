@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,7 +89,37 @@ public class MainActivity extends Activity {
         findViewById(R.id.testAiBtn).setOnClickListener(v -> testAI());
         findViewById(R.id.keyLink).setOnClickListener(v -> openUrl("https://aistudio.google.com/apikey"));
 
+        // 2.0: nível de proteção
+        RadioButton blind = findViewById(R.id.modeBlindado);
+        RadioButton post = findViewById(R.id.modePost);
+        (Prefs.blindado(this) ? blind : post).setChecked(true);
+        blind.setOnCheckedChangeListener((b, on) -> { if (on) Prefs.sp(this).edit().putString(Prefs.K_MODE, "blindado").apply(); renderStatus(); });
+        post.setOnCheckedChangeListener((b, on) -> { if (on) Prefs.sp(this).edit().putString(Prefs.K_MODE, "post").apply(); renderStatus(); });
+        bindFlag(R.id.skipSwitch, Prefs.K_SKIP);
+        bindFlag(R.id.muteSwitch, Prefs.K_MUTE);
+        bindFlag(R.id.searchSwitch, Prefs.K_BLOCK_SEARCH);
+        bindFlag(R.id.ocrSwitch, Prefs.K_OCR);
+        bindFlag(R.id.visionSwitch, Prefs.K_VISION);
+        if (Build.VERSION.SDK_INT < 30) {
+            Switch ocr = findViewById(R.id.ocrSwitch);
+            ocr.setEnabled(false);
+            ocr.setText("Ler texto dentro de imagens (precisa de Android 11 ou mais novo)");
+            Switch vis = findViewById(R.id.visionSwitch);
+            vis.setEnabled(false);
+        }
+
         renderApps();
+    }
+
+    private void bindFlag(int id, final String key) {
+        Switch s = findViewById(id);
+        s.setChecked(Prefs.flag(this, key));
+        s.setOnCheckedChangeListener((b, on) -> {
+            Prefs.sp(this).edit().putBoolean(key, on).apply();
+            if (Prefs.K_VISION.equals(key) && on && Prefs.geminiKey(this).isEmpty()) {
+                Toast.makeText(this, "Cole a chave do Gemini lá embaixo para a IA visual funcionar.", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -114,7 +146,7 @@ public class MainActivity extends Activity {
     private void renderStatus() {
         boolean on = serviceEnabled();
         if (on && Prefs.enabled(this)) {
-            statusText.setText("✓ Escudo ativo");
+            statusText.setText(Prefs.blindado(this) ? "✓ Escudo 2.0 ativo · modo blindado" : "✓ Escudo 2.0 ativo · modo leve");
             statusText.setTextColor(0xFF34D399);
             statusHelp.setText("Ele cobre os spoilers sozinho enquanto você usa os apps marcados abaixo.");
             activateBtn.setVisibility(View.GONE);

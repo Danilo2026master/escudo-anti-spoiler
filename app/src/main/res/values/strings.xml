@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">Escudo Anti-Spoiler</string>
     <string name="service_label">Escudo Anti-Spoiler</string>
-    <string name="service_summary">Cobre spoilers no YouTube, Instagram, Facebook e outros apps.</string>
-    <string name="service_description">Cobre posts, vídeos e comentários com spoilers dos temas que você escolheu no YouTube, Instagram, Facebook e outros apps. O Escudo lê o texto que aparece na tela desses apps só para achar spoilers. Nada sai do seu celular, a não ser que você ligue a mini IA do Gemini.</string>
+    <string name="service_summary">Bloqueia spoilers no YouTube, Instagram, Facebook e outros apps.</string>
+    <string name="service_description">Esconde spoilers dos temas que você escolheu no YouTube, Instagram, Facebook e outros apps: escurece a tela, silencia, pula Reels/Shorts e apaga buscas. O Escudo lê o texto da tela e das imagens desses apps só para achar spoilers, tudo no próprio celular. Só sai alguma coisa do aparelho se você ligar a mini IA do Gemini.</string>
 </resources>

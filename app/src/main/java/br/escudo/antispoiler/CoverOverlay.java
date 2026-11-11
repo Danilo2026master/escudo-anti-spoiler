@@ -109,6 +109,13 @@ final class CoverOverlay {
         return covers.isEmpty();
     }
 
+    /** Áreas cobertas agora (o reconhecimento por imagem ignora essas partes). */
+    List<Rect> currentRects() {
+        List<Rect> out = new ArrayList<>();
+        for (Cover c : covers) out.add(new Rect(c.rect));
+        return out;
+    }
+
     void setCovers(List<Cover> list) {
         covers = list;
         if (coverView != null) coverView.invalidate();

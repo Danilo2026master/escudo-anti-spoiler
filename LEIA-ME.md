@@ -1,4 +1,23 @@
-# 🛡️ Escudo Anti-Spoiler — app para Android
+# 🛡️ Escudo Anti-Spoiler 2.0 — app para Android
+
+## Novidades da 2.0 (modo blindado)
+
+- **Tela toda preta + som mudo** assim que um spoiler aparece em qualquer lugar da tela.
+  A tela preta não segura o dedo: dá para continuar rolando "no escuro" até o spoiler sair.
+  Embaixo aparecem os botões **Voltar**, **Pular** e **Mostrar**.
+- **Reels, Shorts e TikTok com spoiler são pulados sozinhos** (até 8 seguidos; depois ele para e pede para você voltar).
+- **Buscas bloqueadas**: se você (ou o teclado) digitar "GTA 6" na busca do YouTube/Instagram, o Escudo apaga na hora.
+- **Reconhecimento por imagem** (Android 11 ou mais novo): o Escudo lê o texto que está *dentro* das imagens
+  (miniaturas, capas, legendas no vídeo, textos em cima de Reels), no próprio celular, em fração de segundo.
+- **IA visual (opcional)**: com a chave do Gemini, reconhece personagens, logos e cenas mesmo sem texto.
+  Ela manda uma imagem pequena da tela para o Google a cada ~4 s, e só no YouTube, Instagram, Facebook, TikTok, X, Threads,
+  Reddit e Kwai. Nunca no WhatsApp, Telegram, Discord ou Chrome. Vem desligada.
+- Prefere o jeito antigo? Em **Nível de proteção**, escolha **Leve** (capa só no post).
+
+> Se você instalou a 1.0, é só instalar a 2.0 por cima (as configurações continuam). Depois abra a Acessibilidade
+> e confira se o Escudo continua ligado.
+
+---
 
 Cobre posts, vídeos, Reels, Shorts e comentários com spoiler dentro dos apps **YouTube, Instagram, Facebook**
 (e também X, TikTok, Threads, Reddit e Kwai; dá para ligar Chrome, WhatsApp, Telegram e Discord).

@@ -158,9 +158,9 @@ public final class Gemini {
                 throw new Exception("Gemini: " + msg);
             }
             JSONObject data = new JSONObject(resp);
-            JSONArray parts = data.getJSONArray("candidates").getJSONObject(0).getJSONObject("content").getJSONArray("parts");
+            JSONArray outParts = data.getJSONArray("candidates").getJSONObject(0).getJSONObject("content").getJSONArray("parts");
             StringBuilder text = new StringBuilder();
-            for (int i = 0; i < parts.length(); i++) text.append(parts.getJSONObject(i).optString("text", ""));
+            for (int i = 0; i < outParts.length(); i++) text.append(outParts.getJSONObject(i).optString("text", ""));
             return parseJson(text.toString());
         }
         throw last != null ? last : new Exception("Gemini indisponível.");

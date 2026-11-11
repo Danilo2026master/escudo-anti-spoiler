@@ -1,0 +1,4 @@
+// Arquivo de build do projeto. As configurações do app ficam em app/build.gradle.
+plugins {
+    id 'com.android.application' version '8.13.0' apply false
+}

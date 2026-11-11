@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Cabeçalho -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/icon_round"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_launcher_fg" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textColor="@color/text"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="YouTube, Instagram, Facebook e mais"
+                    android:textColor="@color/muted"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Status -->
+        <LinearLayout style="@style/Card">
+
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/statusHelp"
+                style="@style/Muted"
+                android:layout_marginTop="4dp" />
+
+            <Button
+                android:id="@+id/activateBtn"
+                style="@style/BtnPrimary"
+                android:layout_marginTop="12dp"
+                android:text="Ativar agora" />
+
+            <Switch
+                android:id="@+id/masterSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Proteção ligada"
+                android:textColor="@color/text"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <!-- Adicionar tema -->
+        <LinearLayout style="@style/Card">
+
+            <TextView
+                style="@style/CardTitle"
+                android:text="O QUE VOCÊ NÃO QUER VER?" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/addText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/input"
+                    android:hint="Ex.: final de Stranger Things, BBB…"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLength="200"
+                    android:padding="12dp"
+                    android:textColor="@color/text"
+                    android:textColorHint="@color/hint"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/addBtn"
+                    style="@style/BtnPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Bloquear" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/addResult"
+                style="@style/Muted"
+                android:layout_marginTop="8dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Temas -->
+        <LinearLayout style="@style/Card">
+
+            <TextView
+                style="@style/CardTitle"
+                android:text="BLOQUEANDO AGORA" />
+
+            <LinearLayout
+                android:id="@+id/topicsList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+        <!-- Apps -->
+        <LinearLayout style="@style/Card">
+
+            <TextView
+                style="@style/CardTitle"
+                android:text="APPS PROTEGIDOS" />
+
+            <LinearLayout
+                android:id="@+id/appsList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+        <!-- IA -->
+        <LinearLayout style="@style/Card">
+
+            <TextView
+                style="@style/CardTitle"
+                android:text="MINI IA (OPCIONAL)" />
+
+            <TextView
+                style="@style/Muted"
+                android:text="Com a IA, o app monta a lista de palavras sozinho e confere as palavras duvidosas (ex.: “Doomsday”) antes de cobrir. Usa o Gemini do Google, de graça: crie uma chave e cole abaixo. Só os trechos duvidosos são enviados para conferir." />
+
+            <TextView
+                android:id="@+id/keyLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="→ Pegar chave grátis (aistudio.google.com/apikey)"
+                android:textColor="@color/accent_light"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/geminiKey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input"
+                android:hint="Cole a chave aqui (começa com AIza…)"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="@color/text"
+                android:textColorHint="@color/hint"
+                android:textSize="14sp" />
+
+            <Switch
+                android:id="@+id/verifySwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="A IA confere as palavras duvidosas"
+                android:textColor="@color/text"
+                android:textSize="15sp" />
+
+            <Switch
+                android:id="@+id/blockAmbSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Sem IA, cobrir também as palavras duvidosas"
+                android:textColor="@color/text"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/testAiBtn"
+                style="@style/BtnGhost"
+                android:layout_marginTop="10dp"
+                android:text="Testar a IA" />
+
+            <TextView
+                android:id="@+id/testAiResult"
+                style="@style/Muted"
+                android:layout_marginTop="6dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/Muted"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="O Escudo só lê a tela dos apps marcados, para achar spoilers. Nada sai do seu celular (a não ser os trechos duvidosos, se você ligar a IA)."
+            android:textSize="12sp" />
+    </LinearLayout>
+</ScrollView>
